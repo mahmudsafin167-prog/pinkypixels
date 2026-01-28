@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Pinky Pixels - All-Girls Free Fire Guild</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <!-- AOS CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <!-- Tailwind Config -->
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#f4258c",
+                        "primary-dark": "#d11f78",
+                        "background-light": "#f8f5f7",
+                        "background-dark": "#221019",
+                        "surface-dark": "#2d1a24",
+                        "card-dark": "#39202d",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px" },
+                    boxShadow: {
+                        'glow': '0 0 20px rgba(244, 37, 140, 0.5)',
+                        'glow-text': '0 0 10px rgba(244, 37, 140, 0.8)',
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            font-family: "Space Grotesk", sans-serif;
+        }
+
+        .text-glow {
+            text-shadow: 0 0 20px rgba(244, 37, 140, 0.8), 0 0 40px rgba(244, 37, 140, 0.4);
+        }
+
+        .glass-panel {
+            background: rgba(45, 26, 36, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Mobile Menu Fix */
+        .nav-menu {
+            display: none;
+        }
+
+        .nav-menu.active {
+            background-color: #1a0a14 !important;
+            /* ডার্ক ব্যাকগ্রাউন্ড যা পেছনের লেখা ঢাকবে */
+            position: fixed !important;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            display: flex !important;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999 !important;
+            /* সবার উপরে রাখার জন্য */
+        }
+
+        .nav-menu a {
+            font-size: 24px !important;
+            margin: 15px 0 !important;
+            color: white !important;
+        }
+
+        /* Hide scrollbar for Chrome, Safari and Opera */
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Hide scrollbar for IE, Edge and Firefox */
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            /* IE and Edge */
+            scrollbar-width: none;
+            /* Firefox */
+        }
+
+        /* CSS Particles */
+        .particles-container {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(244, 37, 140, 0.4);
+            /* Pinkish */
+            border-radius: 50%;
+            pointer-events: none;
+            animation: float-up infinite linear;
+        }
+
+        @keyframes float-up {
+            0% {
+                transform: translateY(100vh) scale(0);
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 0.8;
+                transform: translateY(90vh) scale(1);
+            }
+
+            90% {
+                opacity: 0.8;
+                transform: translateY(10vh) scale(1);
+            }
+
+            100% {
+                transform: translateY(-10vh) scale(0);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+
+<body
+    class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white overflow-x-hidden selection:bg-primary selection:text-white">
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 glass-panel border-b border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <div class="flex items-center gap-3">
+                    <div class="size-10 text-primary flex items-center justify-center bg-white/10 rounded-full">
+                        <span class="material-symbols-outlined text-[28px]">sports_esports</span>
+                    </div>
+                    <span class="text-xl font-bold tracking-tight text-white">PINKY PIXELS</span>
+                </div>
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center gap-8">
+                    <a class="text-sm font-medium hover:text-primary transition-colors" href="#">Home</a>
+                    <a class="text-sm font-medium hover:text-primary transition-colors" href="#about">About</a>
+                    <a class="text-sm font-medium hover:text-primary transition-colors"
+                        href="#activities">Activities</a>
+                    <a class="text-sm font-medium hover:text-primary transition-colors" href="members.html">Members</a>
+                    <a class="text-sm font-medium hover:text-primary transition-colors" href="#join">Join</a>
+                </div>
+                <!-- CTA -->
+                <div class="hidden md:block">
+                    <button
+                        class="open-join-modal bg-primary hover:bg-primary-dark text-white px-6 py-2.5 rounded-xl text-sm font-bold transition-all shadow-glow hover:shadow-lg transform hover:-translate-y-0.5">
+                        Join Guild
+                    </button>
+                </div>
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-white focus:outline-none">
+                        <span class="material-symbols-outlined text-3xl">menu</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Overlay -->
+        <div id="mobile-menu" class="nav-menu md:hidden">
+            <div class="px-4 py-12 flex flex-col items-center justify-center">
+                <!-- Close Button for Mobile Menu -->
+                <button id="mobile-menu-close" class="absolute top-8 right-8 text-white">
+                    <span class="material-symbols-outlined text-4xl">close</span>
+                </button>
+                <a href="#"
+                    class="text-3xl font-bold text-white hover:text-primary transition-all duration-300 hover:scale-105 hover:drop-shadow-[0_0_15px_rgba(244,37,140,0.8)]">Home</a>
+                <a href="#about"
+                    class="text-3xl font-bold text-white hover:text-primary transition-all duration-300 hover:scale-105 hover:drop-shadow-[0_0_15px_rgba(244,37,140,0.8)]">About</a>
+                <a href="#activities"
+                    class="text-3xl font-bold text-white hover:text-primary transition-all duration-300 hover:scale-105 hover:drop-shadow-[0_0_15px_rgba(244,37,140,0.8)]">Activities</a>
+                <a href="members.html"
+                    class="text-3xl font-bold text-white hover:text-primary transition-all duration-300 hover:scale-105 hover:drop-shadow-[0_0_15px_rgba(244,37,140,0.8)]">Members</a>
+                <a href="#join"
+                    class="text-3xl font-bold text-white hover:text-primary transition-all duration-300 hover:scale-105 hover:drop-shadow-[0_0_15px_rgba(244,37,140,0.8)]">Join</a>
+                <button
+                    class="open-join-modal mt-8 bg-primary hover:bg-primary-dark text-white text-xl font-bold px-12 py-4 rounded-2xl shadow-glow hover:shadow-[0_0_30px_rgba(244,37,140,0.6)] transform hover:-translate-y-1 transition-all">
+                    Join Guild
+                </button>
+            </div>
+        </div>
+    </nav>
+    <!-- Hero Section -->
+    <section class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
+        <!-- Background Image with Gradient Overlay -->
+        <div class="absolute inset-0 z-0">
+            <!-- Animated background blobs -->
+            <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-[128px] animate-pulse">
+            </div>
+            <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-600/20 rounded-full blur-[128px]"></div>
+
+            <!-- Logo -->
+            <div class="absolute inset-0 bg-[url('guild_logo.jpg')] bg-cover bg-center opacity-[0.85]"
+                data-alt="Pinky Pixels Guild Logo"></div>
+
+            <!-- Gradient Overlay -->
+            <div
+                class="absolute inset-0 bg-gradient-to-b from-background-dark/80 via-background-dark/60 to-background-dark z-10">
+            </div>
+            <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-600/20 rounded-full blur-[128px]"></div>
+
+            <!-- CSS Particles -->
+            <div class="particles-container z-10">
+                <div class="particle"
+                    style="left: 10%; width: 4px; height: 4px; animation-duration: 7s; animation-delay: 0s;"></div>
+                <div class="particle"
+                    style="left: 20%; width: 6px; height: 6px; animation-duration: 12s; animation-delay: 2s; background: rgba(147, 51, 234, 0.4);">
+                </div> <!-- Purple -->
+                <div class="particle"
+                    style="left: 30%; width: 3px; height: 3px; animation-duration: 8s; animation-delay: 4s;"></div>
+                <div class="particle"
+                    style="left: 40%; width: 5px; height: 5px; animation-duration: 15s; animation-delay: 1s; background: rgba(6, 182, 212, 0.4);">
+                </div> <!-- Cyan -->
+                <div class="particle"
+                    style="left: 50%; width: 4px; height: 4px; animation-duration: 9s; animation-delay: 3s;"></div>
+                <div class="particle"
+                    style="left: 60%; width: 7px; height: 7px; animation-duration: 14s; animation-delay: 5s;"></div>
+                <div class="particle"
+                    style="left: 70%; width: 3px; height: 3px; animation-duration: 11s; animation-delay: 2s; background: rgba(255, 255, 255, 0.3);">
+                </div> <!-- White -->
+                <div class="particle"
+                    style="left: 80%; width: 5px; height: 5px; animation-duration: 13s; animation-delay: 0s;"></div>
+                <div class="particle"
+                    style="left: 90%; width: 4px; height: 4px; animation-duration: 10s; animation-delay: 4s;"></div>
+            </div>
+        </div>
+        <div class="relative z-10 container mx-auto px-4 text-center flex flex-col items-center gap-8">
+            <div
+                class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm">
+                <span class="size-2 rounded-full bg-green-400 animate-pulse"></span>
+                <span class="text-xs font-bold uppercase tracking-widest text-white/80">Recruiting Now</span>
+            </div>
+            <h1 class="text-4xl sm:text-6xl md:text-8xl font-black tracking-tighter text-white text-glow leading-none">
+                PINKY <br class="md:hidden" />
+                <span
+                    class="text-transparent bg-clip-text bg-gradient-to-r from-primary via-purple-400 to-primary bg-300% animate-gradient">PIXELS</span>
+            </h1>
+            <p class="text-lg md:text-xl text-white/80 max-w-2xl font-light">
+                The ultimate all-girls <span class="text-white font-bold">Garena Free Fire</span> guild. Where
+                sisterhood meets competitive dominance.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-5 w-full justify-center mt-4">
+                <button
+                    class="open-join-modal bg-primary hover:bg-primary-dark text-white px-8 py-4 rounded-xl text-base font-bold transition-all shadow-glow hover:scale-105 flex items-center justify-center gap-2">
+                    <span class="material-symbols-outlined">group_add</span>
+                    Join the Guild
+                </button>
+                <a href="members.html"
+                    class="glass-panel hover:bg-white/10 text-white px-8 py-4 rounded-xl text-base font-bold transition-all border border-white/20 hover:border-white/40 flex items-center justify-center gap-2">
+                    <span class="material-symbols-outlined">group</span>
+                    Guild Members
+                </a>
+            </div>
+        </div>
+    </section>
+    <!-- Stats & Progress Section -->
+    <section class="relative -mt-24 z-20 px-4 mb-24">
+        <div class="max-w-6xl mx-auto glass-panel rounded-2xl p-8 shadow-2xl border border-white/10">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+                <!-- Stat 1 -->
+                <div class="flex items-center gap-4 border-r border-white/10 last:border-0 pr-4">
+                    <div class="size-12 rounded-lg bg-primary/20 flex items-center justify-center text-primary">
+                        <span class="material-symbols-outlined text-3xl">swords</span>
+                    </div>
+                    <div>
+                        <p class="text-sm text-white/60 font-medium uppercase">Game</p>
+                        <p class="text-xl font-bold text-white">Free Fire</p>
+                    </div>
+                </div>
+                <!-- Stat 2 -->
+                <div class="flex items-center gap-4 border-r border-white/10 last:border-0 pr-4">
+                    <div class="size-12 rounded-lg bg-primary/20 flex items-center justify-center text-primary">
+                        <span class="material-symbols-outlined text-3xl">fingerprint</span>
+                    </div>
+                    <div>
+                        <p class="text-sm text-white/60 font-medium uppercase">Guild ID</p>
+                        <p class="text-xl font-bold text-white font-mono">3055641363</p>
+                    </div>
+                </div>
+                <!-- Stat 3 -->
+                <div class="flex items-center gap-4">
+                    <div class="size-12 rounded-lg bg-primary/20 flex items-center justify-center text-primary">
+                        <span class="material-symbols-outlined text-3xl">military_tech</span>
+                    </div>
+                    <div>
+                        <p class="text-sm text-white/60 font-medium uppercase">Current Level</p>
+                        <p class="text-xl font-bold text-white">Level <span class="counter" data-target="6">0</span></p>
+                    </div>
+                </div>
+            </div>
+            <!-- Progress Bar -->
+            <div class="border-t border-white/10 pt-6">
+                <div class="flex justify-between items-end mb-2">
+                    <div class="flex flex-col">
+                        <span class="text-xs font-bold text-primary tracking-widest uppercase mb-1">Pushing Rank</span>
+                        <span class="text-white font-bold">Road to Level 7</span>
+                    </div>
+                    <span class="text-primary font-bold text-xl"><span class="counter" data-target="85">0</span>%</span>
+                </div>
+                <div class="h-4 w-full bg-surface-dark rounded-full overflow-hidden border border-white/5">
+                    <div
+                        class="h-full bg-gradient-to-r from-purple-600 to-primary w-[85%] rounded-full shadow-[0_0_15px_rgba(244,37,140,0.6)] relative">
+                        <div class="absolute inset-0 bg-white/20 animate-[shimmer_2s_infinite] skew-x-12"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- About Section -->
+    <section class="py-20 px-4 relative overflow-hidden" id="about">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div class="relative order-2 lg:order-1">
+                <div class="absolute inset-0 bg-primary rounded-2xl rotate-3 opacity-20 blur-sm"></div>
+                <div
+                    class="relative rounded-2xl overflow-hidden border border-white/10 shadow-glow rotate-3 group transition-transform hover:scale-[1.02]">
+                    <div class="absolute inset-0 bg-gradient-to-t from-background-dark to-transparent opacity-60 z-10">
+                    </div>
+                    <img alt="Pinky Pixels Guild Screenshot"
+                        class="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-110"
+                        src="guild_screenshot.jpg" />
+                    <div
+                        class="absolute bottom-4 left-0 right-0 text-center md:text-left md:bottom-6 md:left-6 md:right-auto z-20">
+                        <p class="text-white text-sm font-medium">Join <span class="counter" data-target="50">0</span>+
+                            Active Members</p>
+                    </div>
+                </div>
+            </div>
+            <div class="order-1 lg:order-2 text-center md:text-left">
+                <div
+                    class="inline-block px-3 py-1 rounded-full border border-primary/30 bg-primary/10 text-primary text-xs font-bold mb-6">
+                    ABOUT US</div>
+                <h2 class="text-3xl md:text-5xl font-bold text-white mb-6 leading-tight">Sisterhood in <br /><span
+                        class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-purple-400">Battle</span>
+                </h2>
+                <p class="text-lg text-white/70 mb-6 leading-relaxed">
+                    Gaming spaces can be tough, but Pinky Pixels is different. We are a sanctuary for female gamers who
+                    want to compete at a high level without the toxicity.
+                </p>
+                <p class="text-lg text-white/70 mb-8 leading-relaxed">
+                    Founded in 2023, we focus on building genuine friendships, improving our skills together, and
+                    dominating the lobby with style and coordination.
+                </p>
+                <div class="flex gap-4 justify-center md:justify-start">
+                    <div class="flex flex-col gap-1">
+                        <span class="text-3xl font-bold text-primary"><span class="counter"
+                                data-target="100">0</span>%</span>
+                        <span class="text-sm text-white/50">Female Roster</span>
+                    </div>
+                    <div class="w-px bg-white/10 mx-4"></div>
+                    <div class="flex flex-col gap-1">
+                        <span class="text-3xl font-bold text-primary">24/7</span>
+                        <span class="text-sm text-white/50">Messenger Group</span>
+                    </div>
+                </div>
+                <div class="mt-8 flex justify-center md:justify-start">
+                    <a href="members.html"
+                        class="inline-flex items-center gap-2 text-primary font-bold hover:text-white transition-colors group">
+                        <span>View All Members</span>
+                        <span
+                            class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Core Values -->
+    <section class="py-20 px-4 bg-surface-dark/30">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Our Core Values</h2>
+                <p class="text-white/60 max-w-2xl mx-auto">The pillars that make Pinky Pixels more than just a guild
+                    tag.</p>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6">
+                <!-- Unity -->
+                <div data-aos="zoom-in" data-aos-delay="100"
+                    class="bg-card-dark p-4 md:p-8 rounded-2xl border border-primary/20 hover:border-primary/50 transition-colors group shadow-[0_0_15px_rgba(244,37,140,0.15)] md:shadow-none">
+                    <div
+                        class="size-10 md:size-14 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-400 flex items-center justify-center text-white mb-4 md:mb-6 shadow-lg group-hover:scale-110 transition-transform">
+                        <span class="material-symbols-outlined text-xl md:text-3xl">handshake</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Unity</h3>
+                    <p class="text-white/60 text-sm leading-relaxed">We move as one. No member is left behind in the
+                        zone or in life.</p>
+                </div>
+                <!-- Loyalty -->
+                <div data-aos="zoom-in" data-aos-delay="200"
+                    class="bg-card-dark p-4 md:p-8 rounded-2xl border border-primary/20 hover:border-primary/50 transition-colors group shadow-[0_0_15px_rgba(244,37,140,0.15)] md:shadow-none">
+                    <div
+                        class="size-10 md:size-14 rounded-xl bg-gradient-to-br from-red-500 to-primary flex items-center justify-center text-white mb-4 md:mb-6 shadow-lg group-hover:scale-110 transition-transform">
+                        <span class="material-symbols-outlined text-xl md:text-3xl">favorite</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Loyalty</h3>
+                    <p class="text-white/60 text-sm leading-relaxed">Commitment to the tag. We wear our guild name with
+                        absolute pride.</p>
+                </div>
+                <!-- Respect -->
+                <div data-aos="zoom-in" data-aos-delay="300"
+                    class="bg-card-dark p-4 md:p-8 rounded-2xl border border-primary/20 hover:border-primary/50 transition-colors group shadow-[0_0_15px_rgba(244,37,140,0.15)] md:shadow-none">
+                    <div
+                        class="size-10 md:size-14 rounded-xl bg-gradient-to-br from-purple-500 to-indigo-500 flex items-center justify-center text-white mb-4 md:mb-6 shadow-lg group-hover:scale-110 transition-transform">
+                        <span class="material-symbols-outlined text-xl md:text-3xl">diamond</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Respect</h3>
+                    <p class="text-white/60 text-sm leading-relaxed">Zero toxicity policy. We respect our teammates and
+                        our opponents.</p>
+                </div>
+                <!-- Positivity -->
+                <div data-aos="zoom-in" data-aos-delay="400"
+                    class="bg-card-dark p-4 md:p-8 rounded-2xl border border-primary/20 hover:border-primary/50 transition-colors group shadow-[0_0_15px_rgba(244,37,140,0.15)] md:shadow-none">
+                    <div
+                        class="size-10 md:size-14 rounded-xl bg-gradient-to-br from-yellow-400 to-orange-500 flex items-center justify-center text-white mb-4 md:mb-6 shadow-lg group-hover:scale-110 transition-transform">
+                        <span class="material-symbols-outlined text-xl md:text-3xl">sunny</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Positivity</h3>
+                    <p class="text-white/60 text-sm leading-relaxed">Good vibes only. We lift each other up after every
+                        match.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Activities Grid -->
+    <section class="py-20 px-4" id="activities">
+        <div class="max-w-7xl mx-auto">
+            <div
+                class="flex flex-col md:flex-row justify-between items-center md:items-end mb-12 gap-4 text-center md:text-left">
+                <div>
+                    <h2 class="text-3xl md:text-4xl font-bold text-white mb-2">Guild Activities</h2>
+                    <p class="text-white/60">What we do when we're online.</p>
+                </div>
+                <button class="text-primary font-bold hover:text-white transition-colors flex items-center gap-1">
+                    See All Events <span class="material-symbols-outlined text-lg">arrow_forward</span>
+                </button>
+            </div>
+            <div
+                class="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide -mx-4 px-4 gap-4 md:grid md:grid-cols-3 md:gap-6 md:mx-0 md:px-0 pb-4 md:pb-0 after:content-[''] after:w-4 after:flex-none md:after:content-none">
+                <!-- Card 1 -->
+                <div data-aos="fade-up" data-aos-delay="100"
+                    class="w-[85vw] md:w-auto flex-none snap-center group relative h-80 rounded-2xl overflow-hidden cursor-pointer shadow-glow-sm hover:shadow-glow transition-all">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-black via-primary/20 to-primary/5 z-10 opacity-90">
+                    </div>
+                    <img alt="Competitive Scrims"
+                        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                        src="activity_scrims.png" />
+                    <div class="absolute bottom-0 left-0 p-6 z-20 w-full">
+                        <div class="bg-primary/90 text-white text-xs font-bold px-2 py-1 rounded w-fit mb-2">WEEKLY
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-1">Competitive Scrims</h3>
+                        <p class="text-white/70 text-sm">Every Friday &amp; Saturday night wars.</p>
+                    </div>
+                </div>
+                <!-- Card 2 -->
+                <div data-aos="fade-up" data-aos-delay="200"
+                    class="w-[85vw] md:w-auto flex-none snap-center group relative h-80 rounded-2xl overflow-hidden cursor-pointer shadow-glow-sm hover:shadow-glow transition-all">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-black via-primary/20 to-primary/5 z-10 opacity-90">
+                    </div>
+                    <img alt="Rank Push Squads"
+                        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                        src="activity_rank.jpg" />
+                    <div class="absolute bottom-0 left-0 p-6 z-20 w-full">
+                        <div class="bg-purple-600/90 text-white text-xs font-bold px-2 py-1 rounded w-fit mb-2">
+                            COMPETITIVE</div>
+                        <h3 class="text-xl font-bold text-white mb-1">Rank Push Squads</h3>
+                        <p class="text-white/70 text-sm">Dedicated teams for pushing Grandmaster.</p>
+                    </div>
+                </div>
+                <!-- Card 3 -->
+                <div data-aos="fade-up" data-aos-delay="300"
+                    class="w-[85vw] md:w-auto flex-none snap-center group relative h-80 rounded-2xl overflow-hidden cursor-pointer shadow-glow-sm hover:shadow-glow transition-all">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-black via-primary/20 to-primary/5 z-10 opacity-90">
+                    </div>
+                    <img alt="Community Meetups"
+                        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                        src="activity_meetup.jpg" />
+                    <div class="absolute bottom-0 left-0 p-6 z-20 w-full">
+                        <div class="bg-blue-500/90 text-white text-xs font-bold px-2 py-1 rounded w-fit mb-2">SOCIAL
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-1">Community Meetups</h3>
+                        <p class="text-white/70 text-sm">Online events and hangouts.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Join Us Section -->
+    <section class="py-20 px-4" id="join">
+        <div class="max-w-4xl mx-auto">
+            <div
+                class="relative rounded-3xl overflow-hidden border border-primary/30 bg-surface-dark p-8 md:p-12 text-center">
+                <!-- Background decorative elements -->
+                <div
+                    class="absolute top-0 right-0 w-64 h-64 bg-primary/20 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/2">
+                </div>
+                <div class="relative z-10">
+                    <h2 class="text-4xl font-bold text-white mb-8">Ready to be a Pixel?</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10 text-left">
+                        <div class="bg-background-dark/50 p-6 rounded-xl border border-white/5">
+                            <div class="flex items-center gap-3 mb-4">
+                                <div
+                                    class="size-8 rounded-full bg-white/10 flex items-center justify-center text-white font-bold">
+                                    1</div>
+                                <h3 class="text-lg font-bold text-white">Check Requirements</h3>
+                            </div>
+                            <ul class="space-y-3 text-white/70 text-sm">
+                                <li class="flex items-center gap-2"><span
+                                        class="material-symbols-outlined text-green-400 text-lg">check_circle</span>
+                                    Level 50+ in Free Fire</li>
+                                <li class="flex items-center gap-2"><span
+                                        class="material-symbols-outlined text-green-400 text-lg">check_circle</span> KD
+                                    Ratio 2.0+ preferred</li>
+                                <li class="flex items-center gap-2"><span
+                                        class="material-symbols-outlined text-green-400 text-lg">check_circle</span> Mic
+                                    on for Squad games</li>
+                                <li class="flex items-center gap-2"><span
+                                        class="material-symbols-outlined text-green-400 text-lg">check_circle</span>
+                                    Must change name within 7 days</li>
+                            </ul>
+                        </div>
+                        <div class="bg-background-dark/50 p-6 rounded-xl border border-white/5">
+                            <div class="flex items-start gap-4">
+                                <div
+                                    class="size-10 rounded-full bg-primary/10 flex items-center justify-center text-primary shrink-0 mt-1">
+                                    <span class="material-symbols-outlined">chat</span>
+                                </div>
+                                <div>
+                                    <h4 class="text-white font-bold mb-1">Interview</h4>
+                                    <p class="text-white/60 text-sm">Message us on Facebook to introduce yourself and
+                                        play a
+                                        trial match.</p>
+                                </div>
+                            </div>
+                            <div
+                                class="p-3 bg-black/30 rounded-lg flex justify-between items-center border border-white/5">
+                                <code id="guild-id-text" class="text-primary font-mono font-bold">3055641363</code>
+                                <button id="copy-guild-id-btn"
+                                    class="text-xs text-white/50 hover:text-white flex items-center gap-1 transition-colors">
+                                    <span class="material-symbols-outlined text-sm">content_copy</span> Copy
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <button
+                        class="open-join-modal bg-primary hover:bg-primary-dark text-white text-lg font-bold py-4 px-12 rounded-xl shadow-glow hover:shadow-lg hover:scale-105 transition-all w-full md:w-auto">
+                        Join Pinky Pixels
+                    </button>
+                    <p class="mt-4 text-white/40 text-sm">Applications reviewed within 24 hours.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Social Media -->
+    <section class="py-12 px-4 border-t border-white/5 bg-background-dark">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+            <div class="text-center md:text-left">
+                <h3 class="text-xl font-bold text-white">Follow the Action</h3>
+                <p class="text-white/50 text-sm">Highlights, updates, and behind the scenes.</p>
+            </div>
+            <div class="flex gap-4">
+                <!-- TikTok Button -->
+                <a class="h-12 px-6 rounded-lg bg-[#25F4EE]/10 hover:bg-[#25F4EE]/20 text-[#25F4EE] border border-[#25F4EE]/30 flex items-center gap-2 transition-all duration-300 hover:scale-110 hover:shadow-[0_0_20px_rgba(37,244,238,0.5)]"
+                    href="https://www.tiktok.com/@pinky.pixelsff?lang=en" target="_blank">
+                    <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z">
+                        </path>
+                    </svg>
+                    <span class="font-bold">TikTok</span>
+                </a>
+                <!-- Facebook Button -->
+                <a class="h-12 px-6 rounded-lg bg-[#1877F2]/10 hover:bg-[#1877F2]/20 text-[#1877F2] border border-[#1877F2]/30 flex items-center gap-2 transition-all duration-300 hover:scale-110 hover:shadow-[0_0_20px_rgba(24,119,242,0.5)]"
+                    href="https://www.facebook.com/profile.php?id=61580447529624" target="_blank">
+                    <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z">
+                        </path>
+                    </svg>
+                    <span class="font-bold">Facebook</span>
+                </a>
+            </div>
+        </div>
+    </section>
+    <!-- Footer -->
+    <footer class="bg-gradient-to-r from-primary-dark via-primary to-primary-dark text-white py-8">
+        <div class="container mx-auto px-4 flex flex-col items-center justify-center gap-4">
+            <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-2xl">sports_esports</span>
+                <span class="font-bold text-lg tracking-wider">PINKY PIXELS</span>
+            </div>
+            <div class="h-px w-24 bg-white/30"></div>
+            <p class="font-medium tracking-[0.2em] text-sm uppercase text-white/90 text-center">
+                One Tag • One Guild • One Power
+            </p>
+            <p class="text-xs text-white/50 mt-4">
+                © 2024 Pinky Pixels Guild. All rights reserved. Not affiliated with Garena Free Fire.
+            </p>
+        </div>
+    </footer>
+
+    <!-- Join Modal -->
+    <div id="join-modal"
+        class="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm hidden transition-all duration-300">
+        <div class="relative w-full max-w-lg transform scale-95 opacity-0 transition-all duration-300">
+            <!-- Glass Card -->
+            <div
+                class="relative bg-[#2d1a24]/90 backdrop-blur-xl border border-white/10 rounded-2xl p-8 shadow-2xl overflow-hidden">
+                <!-- Decorative Blobs -->
+                <div
+                    class="absolute top-0 right-0 w-32 h-32 bg-primary/20 rounded-full blur-[50px] -translate-y-1/2 translate-x-1/2">
+                </div>
+                <div
+                    class="absolute bottom-0 left-0 w-32 h-32 bg-purple-600/20 rounded-full blur-[50px] translate-y-1/2 -translate-x-1/2">
+                </div>
+
+                <!-- Content -->
+                <div class="relative z-10">
+                    <button id="close-modal-btn"
+                        class="absolute -top-2 -right-2 text-white/50 hover:text-white transition-colors">
+                        <span class="material-symbols-outlined text-2xl">close</span>
+                    </button>
+
+                    <div class="text-center mb-8">
+                        <h2 class="text-3xl font-bold text-white mb-2">Join the Squad</h2>
+                        <p class="text-white/60 text-sm">Fill out the form below to apply. New recruits are reviewed
+                            daily!</p>
+                    </div>
+
+                    <form id="join-form" class="space-y-5">
+                        <div class="space-y-1">
+                            <label for="player-name"
+                                class="text-xs font-bold text-white/80 uppercase tracking-wider ml-1">Player
+                                Name</label>
+                            <div class="relative">
+                                <span class="absolute left-4 top-3.5 text-primary">
+                                    <span class="material-symbols-outlined text-xl">person</span>
+                                </span>
+                                <input type="text" id="player-name" required placeholder="e.g. PixelQueen"
+                                    class="w-full bg-black/40 border border-white/10 rounded-xl py-3 pl-12 pr-4 text-white placeholder-white/30 focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/50 transition-all">
+                            </div>
+                        </div>
+
+                        <div class="space-y-1">
+                            <label for="player-uid"
+                                class="text-xs font-bold text-white/80 uppercase tracking-wider ml-1">Free Fire
+                                UID</label>
+                            <div class="relative">
+                                <span class="absolute left-4 top-3.5 text-primary">
+                                    <span class="material-symbols-outlined text-xl">fingerprint</span>
+                                </span>
+                                <input type="number" id="player-uid" required placeholder="e.g. 12345678"
+                                    class="w-full bg-black/40 border border-white/10 rounded-xl py-3 pl-12 pr-4 text-white placeholder-white/30 focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/50 transition-all">
+                            </div>
+                        </div>
+
+                        <div class="space-y-1">
+                            <label for="player-age"
+                                class="text-xs font-bold text-white/80 uppercase tracking-wider ml-1">Age</label>
+                            <div class="relative">
+                                <span class="absolute left-4 top-3.5 text-primary">
+                                    <span class="material-symbols-outlined text-xl">calendar_today</span>
+                                </span>
+                                <input type="number" id="player-age" required min="13" max="99" placeholder="e.g. 18"
+                                    class="w-full bg-black/40 border border-white/10 rounded-xl py-3 pl-12 pr-4 text-white placeholder-white/30 focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/50 transition-all">
+                            </div>
+                        </div>
+
+                        <button type="submit"
+                            class="w-full bg-primary hover:bg-primary-dark text-white font-bold py-3.5 rounded-xl shadow-lg hover:shadow-glow transition-all flex items-center justify-center gap-2 mt-2">
+                            <span>Submit Application</span>
+                            <span class="material-symbols-outlined">send</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- AOS JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Init AOS
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 100
+        });
+
+        const btn = document.getElementById('mobile-menu-btn');
+        const closeBtn = document.getElementById('mobile-menu-close');
+        const menu = document.getElementById('mobile-menu');
+
+        btn.addEventListener('click', () => {
+            menu.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+
+        closeBtn.addEventListener('click', () => {
+            menu.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+
+        // Close menu when clicking a link
+        menu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                menu.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
+
+        // Copy Guild ID Functionality
+        const copyBtn = document.getElementById('copy-guild-id-btn');
+        const guildIdText = document.getElementById('guild-id-text');
+
+        copyBtn.addEventListener('click', () => {
+            const idToCopy = guildIdText.textContent.trim();
+
+            navigator.clipboard.writeText(idToCopy).then(() => {
+                // Visual feedback
+                const originalContent = copyBtn.innerHTML;
+                copyBtn.innerHTML = '<span class="material-symbols-outlined text-sm">check</span> Copied!';
+                copyBtn.classList.remove('text-white/50');
+                copyBtn.classList.add('text-green-400', 'font-bold');
+
+                // Reset after 2 seconds
+                setTimeout(() => {
+                    copyBtn.innerHTML = '<span class="material-symbols-outlined text-sm">content_copy</span> Copy';
+                    copyBtn.classList.remove('text-green-400', 'font-bold');
+                    copyBtn.classList.add('text-white/50');
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy description: ', err);
+                // Fallback for visual indication of failure if needed, but console log is usually enough for dev
+            });
+        });
+
+        // Counting Animation
+        const observerOptions = {
+            threshold: 0.5
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const counter = entry.target;
+                    const target = parseInt(counter.getAttribute('data-target'));
+                    const duration = 1500; // 1.5 seconds
+                    const stepTime = 20; // update every 20ms
+                    const steps = duration / stepTime;
+                    const increment = target / steps;
+
+                    let current = 0;
+                    const timer = setInterval(() => {
+                        current += increment;
+                        if (current >= target) {
+                            counter.innerText = target;
+                            clearInterval(timer);
+                        } else {
+                            counter.innerText = Math.ceil(current);
+                        }
+                    }, stepTime);
+
+                    observer.unobserve(counter);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.counter').forEach(counter => {
+            observer.observe(counter);
+        });
+
+        // Modal Logic
+        const modal = document.getElementById('join-modal');
+        const closeModalBtn = document.getElementById('close-modal-btn');
+        const openModalBtns = document.querySelectorAll('.open-join-modal');
+        const joinForm = document.getElementById('join-form');
+
+        const openModal = () => {
+            modal.classList.remove('hidden');
+            // Small delay to allow display:block to apply before opacity transition
+            setTimeout(() => {
+                modal.firstElementChild.classList.remove('scale-95', 'opacity-0');
+                modal.firstElementChild.classList.add('scale-100', 'opacity-100');
+            }, 10);
+            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        };
+
+        // Store initial form HTML to reset correctly
+        const initialFormHTML = joinForm.innerHTML;
+
+        const closeModal = () => {
+            modal.firstElementChild.classList.remove('scale-100', 'opacity-100');
+            modal.firstElementChild.classList.add('scale-95', 'opacity-0');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                // Restore form if it was in success state
+                if (joinForm.innerHTML !== initialFormHTML) {
+                    joinForm.innerHTML = initialFormHTML;
+                    joinForm.reset();
+                } else {
+                    joinForm.reset();
+                }
+            }, 300); // Match transition duration
+            document.body.style.overflow = '';
+        };
+
+        openModalBtns.forEach(btn => btn.addEventListener('click', openModal));
+        closeModalBtn.addEventListener('click', closeModal);
+
+        // Close on click outside
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+
+        // Handle Form Submission
+        // We need to delegate the listener because we replace innerHTML
+        // But joinForm element itself is stable, so we can re-attach or just check if it exists
+        // Actually, replacing innerHTML destroys listeners on children, but joinForm submits, so the listener on joinForm (parent) persists
+        joinForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const btn = joinForm.querySelector('button[type="submit"]');
+            if (!btn) return; // successful state has no submit button
+
+            const name = document.getElementById('player-name').value;
+            const uid = document.getElementById('player-uid').value;
+            const age = document.getElementById('player-age').value;
+            const originalContent = btn.innerHTML; // Capture here
+
+            btn.disabled = true;
+            btn.innerHTML = '<span class="material-symbols-outlined animate-spin">refresh</span> Sending...';
+
+            fetch('https://script.google.com/macros/s/AKfycbz8Z2JndboHueFneymJ3MHx790alN0KZB9EOEZ_rBEQSsD08cXqMQKC0r8nWO7ke2oG/exec', {
+                method: 'POST',
+                body: JSON.stringify({
+                    player_name: name,
+                    uid: uid,
+                    age: age
+                })
+            })
+                .then(response => {
+                    // Success State
+                    joinForm.innerHTML = `
+                        <div class="text-center space-y-6 py-6 animate-fade-in">
+                            <div class="size-20 bg-green-500/20 text-green-500 rounded-full flex items-center justify-center mx-auto shadow-[0_0_20px_rgba(34,197,94,0.3)]">
+                                <span class="material-symbols-outlined text-4xl">check_circle</span>
+                            </div>
+                            <div>
+                                <h3 class="text-2xl font-bold text-white mb-2">Application Sent!</h3>
+                                <p class="text-white/60">We have received your details.</p>
+                                <p class="text-white/60">Now, verify your profile on Messenger.</p>
+                            </div>
+                            <a href="https://www.facebook.com/profile.php?id=61580447529624" target="_blank"
+                                class="inline-flex items-center gap-2 bg-[#1877F2] hover:bg-[#1875f2d3] text-white font-bold py-4 px-8 rounded-xl shadow-lg transition-all transform hover:scale-105 group">
+                                <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                                <span>Message us on Facebook</span>
+                                <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                            </a>
+                        </div>
+                    `;
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Connection error. Please try again or message us on Facebook!');
+                    btn.disabled = false;
+                    btn.innerHTML = originalContent;
+                });
+        });
+
+
+    </script>
+</body>
+
+</html>
