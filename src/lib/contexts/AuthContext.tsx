@@ -15,12 +15,21 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, (user) => {
-            setUser(user);
+        if (!auth || typeof auth.onAuthStateChanged !== 'function') {
             setLoading(false);
-        });
+            return;
+        }
 
-        return () => unsubscribe();
+        try {
+            const unsubscribe = onAuthStateChanged(auth, (user) => {
+                setUser(user);
+                setLoading(false);
+            });
+            return () => unsubscribe();
+        } catch (error) {
+            console.error("Auth initialization failed:", error);
+            setLoading(false);
+        }
     }, []);
 
     return (

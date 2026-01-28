@@ -12,23 +12,25 @@ const firebaseConfig = {
     measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID,
 };
 
-// Initialize Firebase safely for Build time
+// Initialize Firebase safely for Build time vs Runtime
 let app;
 let auth: any;
 let db: any;
 
-const isBuildTime = typeof window === 'undefined' && !process.env.NEXT_PUBLIC_FIREBASE_API_KEY;
+const isBrowser = typeof window !== 'undefined';
+const hasFullConfig = firebaseConfig.apiKey && firebaseConfig.apiKey !== "BUILD_PLACEHOLDER";
 
 if (getApps().length === 0) {
-    if (firebaseConfig.apiKey && firebaseConfig.apiKey !== "BUILD_PLACEHOLDER") {
+    if (hasFullConfig) {
         app = initializeApp(firebaseConfig);
         auth = getAuth(app);
         db = getFirestore(app);
     } else {
-        // Fallback for build time - mock objects to prevent crashes
+        // Fallback for build time ONLY or missing config at runtime
         app = initializeApp({ apiKey: "BUILD_PLACEHOLDER", projectId: "build-placeholder" });
-        auth = {} as any;
-        db = {} as any;
+        // Use proxies or dummy objects that don't crash standard calls
+        auth = isBrowser ? getAuth(app) : {} as any;
+        db = isBrowser ? getFirestore(app) : {} as any;
     }
 } else {
     app = getApp();
