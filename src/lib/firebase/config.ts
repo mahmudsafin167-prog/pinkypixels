@@ -12,8 +12,19 @@ const firebaseConfig = {
     measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID,
 };
 
-// Initialize Firebase
-const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
+// Initialize Firebase safely for Build time
+let app;
+if (getApps().length === 0) {
+    if (firebaseConfig.apiKey) {
+        app = initializeApp(firebaseConfig);
+    } else {
+        // Fallback for build time if env vars are missing
+        app = initializeApp({ apiKey: "BUILD_PLACEHOLDER" });
+    }
+} else {
+    app = getApp();
+}
+
 const auth = getAuth(app);
 const db = getFirestore(app);
 
