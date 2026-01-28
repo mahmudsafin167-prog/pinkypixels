@@ -14,18 +14,26 @@ const firebaseConfig = {
 
 // Initialize Firebase safely for Build time
 let app;
+let auth: any;
+let db: any;
+
+const isBuildTime = typeof window === 'undefined' && !process.env.NEXT_PUBLIC_FIREBASE_API_KEY;
+
 if (getApps().length === 0) {
-    if (firebaseConfig.apiKey) {
+    if (firebaseConfig.apiKey && firebaseConfig.apiKey !== "BUILD_PLACEHOLDER") {
         app = initializeApp(firebaseConfig);
+        auth = getAuth(app);
+        db = getFirestore(app);
     } else {
-        // Fallback for build time if env vars are missing
-        app = initializeApp({ apiKey: "BUILD_PLACEHOLDER" });
+        // Fallback for build time - mock objects to prevent crashes
+        app = initializeApp({ apiKey: "BUILD_PLACEHOLDER", projectId: "build-placeholder" });
+        auth = {} as any;
+        db = {} as any;
     }
 } else {
     app = getApp();
+    auth = getAuth(app);
+    db = getFirestore(app);
 }
-
-const auth = getAuth(app);
-const db = getFirestore(app);
 
 export { app, auth, db };
