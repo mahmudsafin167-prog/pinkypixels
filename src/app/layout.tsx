@@ -7,10 +7,15 @@ import Footer from '@/components/Footer';
 
 const spaceGrotesk = Space_Grotesk({ subsets: ['latin'] });
 
+export const viewport = {
+    width: 'device-width',
+    initialScale: 1,
+    maximumScale: 1,
+};
+
 export const metadata: Metadata = {
     title: 'Pinky Pixels - All-Girls Free Fire Guild',
     description: 'The ultimate all-girls Garena Free Fire guild. Where sisterhood meets competitive dominance.',
-    viewport: 'width=device-width, initial-scale=1.0',
 };
 
 import { AuthProvider } from '@/lib/contexts/AuthContext';
