@@ -11,6 +11,10 @@ export default function AdminPage() {
     const { user, loading } = useAuth();
     const router = useRouter();
     const [allMembers, setAllMembers] = useState<any[]>([]);
+    const [pendingUsers, setPendingUsers] = useState<any[]>([]);
+    const [recruitmentApps, setRecruitmentApps] = useState<any[]>([]);
+    const [isLoading, setIsLoading] = useState(true);
+    const [actionLoading, setActionLoading] = useState<string | null>(null);
     const [activeTab, setActiveTab] = useState<'users' | 'recruitment' | 'members'>('recruitment');
 
     const ADMIN_EMAIL = 'navilatayeba09@gmail.com';
