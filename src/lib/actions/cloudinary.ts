@@ -28,7 +28,14 @@ export async function uploadImage(formData: FormData) {
 
         const result = await new Promise((resolve, reject) => {
             cloudinary.uploader.upload_stream(
-                { resource_type: 'auto', folder: 'pinky_pixels_members' },
+                {
+                    resource_type: 'auto',
+                    folder: 'pinky_pixels_members',
+                    transformation: [
+                        { width: 500, height: 500, crop: 'fill', gravity: 'face' },
+                        { quality: 'auto', fetch_format: 'auto' }
+                    ]
+                },
                 (error, result) => {
                     if (error) {
                         console.error("Cloudinary Upload Stream Error:", error);

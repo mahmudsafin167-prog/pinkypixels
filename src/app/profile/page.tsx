@@ -71,6 +71,7 @@ export default function ProfilePage() {
                 photoUrl: finalPhotoUrl
             }, { merge: true });
             setProfile({ ...profile, name: formData.name, gameUid: formData.gameUid, photoUrl: finalPhotoUrl });
+            alert("Profile updated successfully!");
             setIsEditing(false);
         } catch (error) {
             console.error("Error updating profile:", error);
