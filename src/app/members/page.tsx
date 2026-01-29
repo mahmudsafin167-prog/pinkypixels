@@ -30,11 +30,20 @@ export default function MembersPage() {
                 // to avoid duplication in the grid.
                 membersData = membersData.filter((m: any) => m.name !== 'ROSE 4H' && m.gameUid !== '2134890795');
 
-                // Sort in memory to avoid missing users without joinDate
+                // Sort: Leaders/Admins first, then Oldest -> Newest
                 membersData.sort((a: any, b: any) => {
+                    const priorityRoles = ['Guild Queen', 'Guild Leader', 'Admin', 'Co-Leader'];
+                    // Check if role includes any of the priority keywords (case-insensitive if needed, but strict here matches current data)
+                    const isPriorityA = priorityRoles.some(r => a.role?.includes(r));
+                    const isPriorityB = priorityRoles.some(r => b.role?.includes(r));
+
+                    if (isPriorityA && !isPriorityB) return -1;
+                    if (!isPriorityA && isPriorityB) return 1;
+
+                    // Chronological ASC (Oldest First)
                     const dateA = a.joinDate?.seconds || 0;
                     const dateB = b.joinDate?.seconds || 0;
-                    return dateB - dateA;
+                    return dateA - dateB;
                 });
 
                 setFirestoreMembers(membersData);
