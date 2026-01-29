@@ -10,11 +10,8 @@ import AOSInit from '@/components/AOSInit';
 export default function AdminPage() {
     const { user, loading } = useAuth();
     const router = useRouter();
-    const [pendingUsers, setPendingUsers] = useState<any[]>([]);
-    const [recruitmentApps, setRecruitmentApps] = useState<any[]>([]);
-    const [isLoading, setIsLoading] = useState(true);
-    const [actionLoading, setActionLoading] = useState<string | null>(null);
-    const [activeTab, setActiveTab] = useState<'users' | 'recruitment'>('recruitment');
+    const [allMembers, setAllMembers] = useState<any[]>([]);
+    const [activeTab, setActiveTab] = useState<'users' | 'recruitment' | 'members'>('recruitment');
 
     const ADMIN_EMAIL = 'navilatayeba09@gmail.com';
 
@@ -30,6 +27,9 @@ export default function AdminPage() {
             const unsubUsers = onSnapshot(qUsers, (snapshot) => {
                 const users = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
                 setPendingUsers(users.filter((u: any) => u.status !== 'approved'));
+                // Filter for Approved Members for the new tab
+                const approved = users.filter((u: any) => u.status === 'approved' && u.name !== 'ROSE 4H'); // Exclude Rose from edit
+                setAllMembers(approved.sort((a: any, b: any) => (a.name || '').localeCompare(b.name || '')));
             });
 
             // Listen to Recruitment Applications
@@ -51,6 +51,19 @@ export default function AdminPage() {
             };
         }
     }, [user, loading, router]);
+
+    const handleUpdateRole = async (userId: string, newRole: string) => {
+        setActionLoading(userId);
+        try {
+            await setDoc(doc(db, "users", userId), { role: newRole }, { merge: true });
+            // alert(`Role updated to ${newRole}`); // Optional: Silent update is often better for admin tools
+        } catch (error) {
+            console.error("Error updating role:", error);
+            alert("Failed to update role.");
+        } finally {
+            setActionLoading(null);
+        }
+    };
 
     const handleApproveUser = async (userId: string) => {
         setActionLoading(userId);
@@ -140,6 +153,18 @@ export default function AdminPage() {
         return <div className="min-h-screen flex items-center justify-center text-white bg-background-dark">Verifying Admin Access...</div>;
     }
 
+    const availableRoles = [
+        'Guild Queen',
+        'Guild Leader',
+        'Co-Leader',
+        'Officer',
+        'Member',
+        'Elite Sniper',
+        'Rusher',
+        'Support',
+        'All Rounder'
+    ];
+
     return (
         <main className="min-h-screen bg-background-dark pt-32 pb-20 px-4 md:px-8">
             <AOSInit />
@@ -170,17 +195,24 @@ export default function AdminPage() {
                 <div className="flex gap-4 mb-8 border-b border-white/10 pb-4 overflow-x-auto">
                     <button
                         onClick={() => setActiveTab('recruitment')}
-                        className={`px-6 py-3 rounded-xl font-black text-[10px] tracking-[0.2em] uppercase transition-all flex items-center gap-2 ${activeTab === 'recruitment' ? 'bg-primary text-white shadow-glow' : 'bg-white/5 text-white/40 hover:bg-white/10'}`}
+                        className={`px-6 py-3 rounded-xl font-black text-[10px] tracking-[0.2em] uppercase transition-all flex items-center gap-2 flex-shrink-0 ${activeTab === 'recruitment' ? 'bg-primary text-white shadow-glow' : 'bg-white/5 text-white/40 hover:bg-white/10'}`}
                     >
                         <span className="material-symbols-outlined text-sm">group_add</span>
                         Recruit Leads ({recruitmentApps.length})
                     </button>
                     <button
                         onClick={() => setActiveTab('users')}
-                        className={`px-6 py-3 rounded-xl font-black text-[10px] tracking-[0.2em] uppercase transition-all flex items-center gap-2 ${activeTab === 'users' ? 'bg-purple-600 text-white shadow-[0_0_20px_rgba(168,85,247,0.4)]' : 'bg-white/5 text-white/40 hover:bg-white/10'}`}
+                        className={`px-6 py-3 rounded-xl font-black text-[10px] tracking-[0.2em] uppercase transition-all flex items-center gap-2 flex-shrink-0 ${activeTab === 'users' ? 'bg-purple-600 text-white shadow-[0_0_20px_rgba(168,85,247,0.4)]' : 'bg-white/5 text-white/40 hover:bg-white/10'}`}
                     >
                         <span className="material-symbols-outlined text-sm">badge</span>
                         Card Requests ({pendingUsers.length})
+                    </button>
+                    <button
+                        onClick={() => setActiveTab('members')}
+                        className={`px-6 py-3 rounded-xl font-black text-[10px] tracking-[0.2em] uppercase transition-all flex items-center gap-2 flex-shrink-0 ${activeTab === 'members' ? 'bg-blue-600 text-white shadow-[0_0_20px_rgba(37,99,235,0.4)]' : 'bg-white/5 text-white/40 hover:bg-white/10'}`}
+                    >
+                        <span className="material-symbols-outlined text-sm">manage_accounts</span>
+                        Manage Members ({allMembers.length})
                     </button>
                 </div>
 
@@ -236,7 +268,7 @@ export default function AdminPage() {
                             ))
                         )}
                     </div>
-                ) : (
+                ) : activeTab === 'users' ? (
                     /* AUTH REQUESTS SECTION */
                     <div className="space-y-4">
                         {pendingUsers.length === 0 ? (
@@ -282,6 +314,65 @@ export default function AdminPage() {
                                             className="bg-white/5 hover:bg-red-500/20 text-white/40 hover:text-red-500 px-6 py-3 rounded-xl text-[10px] font-black tracking-widest uppercase italic skew-x-[-10deg] flex-1 md:flex-none border border-white/5 transition-all"
                                         >
                                             DELETE USER
+                                        </button>
+                                    </div>
+                                </div>
+                            ))
+                        )}
+                    </div>
+                ) : (
+                    /* MEMBERS MANAGEMENT SECTION */
+                    <div className="space-y-4">
+                        {allMembers.length === 0 ? (
+                            <div className="bg-white/5 rounded-3xl p-16 text-center border border-white/5">
+                                <span className="material-symbols-outlined text-6xl text-white/10 mb-4">groups</span>
+                                <h3 className="text-xl font-bold text-white/30 uppercase tracking-widest">No Members Found</h3>
+                            </div>
+                        ) : (
+                            allMembers.map((member) => (
+                                <div key={member.id} className="gaming-card rounded-2xl md:rounded-[1.5rem] p-5 md:p-6 border border-white/10 flex flex-col md:flex-row justify-between items-center gap-6 group hover:bg-white/5 transition-all">
+                                    <div className="flex items-center gap-5 w-full md:w-auto min-w-0 flex-1">
+                                        <div className="w-14 h-14 rounded-full border-2 border-white/10 overflow-hidden bg-black/40 flex-shrink-0">
+                                            <img
+                                                src={member.photoUrl || `https://api.dicebear.com/9.x/avataaars/svg?seed=${member.uid}`}
+                                                alt={member.name}
+                                                className="w-full h-full object-cover"
+                                            />
+                                        </div>
+                                        <div className="text-left min-w-0 flex-1">
+                                            <h3 className="text-lg font-display font-black text-white italic skew-x-[-5deg] tracking-widest uppercase truncate">{member.name || 'Unknown'}</h3>
+                                            <p className="text-white/30 text-[9px] mt-1 font-mono uppercase tracking-widest">
+                                                {member.email || member.id}
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    <div className="flex items-center gap-4 w-full md:w-auto">
+                                        <div className="relative w-full md:w-48">
+                                            <select
+                                                value={member.role || 'Member'}
+                                                onChange={(e) => handleUpdateRole(member.id, e.target.value)}
+                                                disabled={actionLoading === member.id}
+                                                className="w-full bg-black/40 border border-white/20 text-white text-[10px] font-bold uppercase tracking-widest rounded-lg px-4 py-3 appearance-none hover:border-primary/50 focus:border-primary focus:outline-none transition-all cursor-pointer"
+                                            >
+                                                {availableRoles.map(role => (
+                                                    <option key={role} value={role} className="bg-neutral-900 text-white py-2">
+                                                        {role}
+                                                    </option>
+                                                ))}
+                                            </select>
+                                            <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-white/50">
+                                                <span className="material-symbols-outlined text-sm">expand_more</span>
+                                            </div>
+                                        </div>
+
+                                        <button
+                                            onClick={() => handleDeleteUser(member.id)}
+                                            disabled={actionLoading === member.id}
+                                            className="bg-red-500/10 hover:bg-red-500 text-red-500 hover:text-white p-3 rounded-xl border border-red-500/20 transition-all flex-shrink-0"
+                                            title="Delete Member"
+                                        >
+                                            <span className="material-symbols-outlined text-lg">delete</span>
                                         </button>
                                     </div>
                                 </div>
