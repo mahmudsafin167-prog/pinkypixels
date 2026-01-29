@@ -107,7 +107,7 @@ export default function ProfilePage() {
                                     <img
                                         src={profile?.photoUrl || user.photoURL || 'https://api.dicebear.com/9.x/avataaars/svg?seed=' + user.uid}
                                         alt="Profile"
-                                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                                        className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-110"
                                     />
                                 </div>
                                 {/* ACTIVE STATUS DOT */}
@@ -200,26 +200,7 @@ export default function ProfilePage() {
                                             <span>collections</span> Choose from Gallery
                                         </label>
                                         <div className="flex overflow-x-auto gap-3 pb-2 scrollbar-hide snap-x mask-linear-fade">
-                                            {['avatar_kelly.png', 'avatar_moco.png', 'avatar_kapella.png'].map((img) => (
-                                                <button
-                                                    key={img}
-                                                    type="button"
-                                                    onClick={() => {
-                                                        const path = `/${img}`;
-                                                        setFormData({ ...formData, photoUrl: path });
-                                                        setProfile((prev: any) => ({ ...prev, photoUrl: path }));
-                                                        setSelectedFile(null);
-                                                    }}
-                                                    className={`relative flex-shrink-0 w-16 h-16 md:w-20 md:h-20 rounded-full border-2 overflow-hidden transition-all snap-start ${formData.photoUrl === `/${img}` ? 'border-primary shadow-[0_0_15px_#ff007f] scale-105' : 'border-white/10 hover:border-primary/50 hover:scale-105'}`}
-                                                >
-                                                    <img src={`/${img}`} alt="Avatar" className="w-full h-full object-cover" />
-                                                    {formData.photoUrl === `/${img}` && (
-                                                        <div className="absolute inset-0 bg-primary/30 flex items-center justify-center">
-                                                            <span className="material-symbols-outlined text-white font-bold text-lg">check</span>
-                                                        </div>
-                                                    )}
-                                                </button>
-                                            ))}
+
                                             {/* Updated list of all images in /images */}
                                             {[
                                                 '118d193c335267a09719c42d18377853.png',
@@ -254,7 +235,7 @@ export default function ProfilePage() {
                                                     }}
                                                     className={`relative flex-shrink-0 w-16 h-16 md:w-20 md:h-20 rounded-full border-2 overflow-hidden transition-all snap-start ${formData.photoUrl === `/images/${img}` ? 'border-primary shadow-[0_0_15px_#ff007f] scale-105' : 'border-white/10 hover:border-primary/50 hover:scale-105'}`}
                                                 >
-                                                    <img src={`/images/${img}`} alt="Gallery" className="w-full h-full object-cover" />
+                                                    <img src={`/images/${img}`} alt="Gallery" className="w-full h-full object-cover object-top" />
                                                     {formData.photoUrl === `/images/${img}` && (
                                                         <div className="absolute inset-0 bg-primary/30 flex items-center justify-center">
                                                             <span className="material-symbols-outlined text-white font-bold text-lg">check</span>
@@ -265,76 +246,7 @@ export default function ProfilePage() {
                                         </div>
                                     </div>
 
-                                    {/* AVATAR GALLERY SECTION - MOVED INSIDE EDIT MODE */}
-                                    <div className="pt-2 pb-4">
-                                        <label className="flex items-center gap-2 text-white/40 text-[9px] md:text-[10px] font-black uppercase tracking-[0.2em] mb-2 md:mb-3 ml-2">
-                                            <span>collections</span> Choose from Gallery
-                                        </label>
-                                        <div className="flex overflow-x-auto gap-3 pb-2 scrollbar-hide snap-x mask-linear-fade">
-                                            {['avatar_kelly.png', 'avatar_moco.png', 'avatar_kapella.png'].map((img) => (
-                                                <button
-                                                    key={img}
-                                                    type="button"
-                                                    onClick={() => {
-                                                        const path = `/${img}`;
-                                                        setFormData({ ...formData, photoUrl: path });
-                                                        setProfile((prev: any) => ({ ...prev, photoUrl: path }));
-                                                        setSelectedFile(null);
-                                                    }}
-                                                    className={`relative flex-shrink-0 w-16 h-16 md:w-20 md:h-20 rounded-full border-2 overflow-hidden transition-all snap-start ${formData.photoUrl === `/${img}` ? 'border-primary shadow-[0_0_15px_#ff007f] scale-105' : 'border-white/10 hover:border-primary/50 hover:scale-105'}`}
-                                                >
-                                                    <img src={`/${img}`} alt="Avatar" className="w-full h-full object-cover" />
-                                                    {formData.photoUrl === `/${img}` && (
-                                                        <div className="absolute inset-0 bg-primary/30 flex items-center justify-center">
-                                                            <span className="material-symbols-outlined text-white font-bold text-lg">check</span>
-                                                        </div>
-                                                    )}
-                                                </button>
-                                            ))}
-                                            {/* Updated list of all images in /images */}
-                                            {[
-                                                '118d193c335267a09719c42d18377853.png',
-                                                '1a660469f5dd320a3c9230d80041e8ce.png',
-                                                '2156d6b5ec48a11fee8cfff3a248a77f.png',
-                                                '3809ca9651ec4b484daa726b29e4a8c0.png',
-                                                '465a496fe5ca40e4cb748c82f7d53b53.png',
-                                                '4a16d6dfce6f801fcb26533425bd7d2d.png',
-                                                '4a6e93ce61e87c40c7d3f58ad8ffb0bd.png',
-                                                '550cdc71cfa97dc3f23008188e474cbf.png',
-                                                '68fb852b9a7c3bc8294234934a59e5f3.png',
-                                                '88068baca6c3adb14238b5050747d8c0.png',
-                                                '9477d8a9b9d1dbce6165b43ad3eaf524.png',
-                                                '9c302601566bd21a15627377bf947097.png',
-                                                '9fd2e425a0a8ccd8b8ec6aa6dcdad7dd.png',
-                                                'a89bfb61f713424f88e8626915d30f23.png',
-                                                'ac9a0b7d631852d8f4b3981035741ec8.png',
-                                                'd3c8711acac05c22d3a5ac170a7a1d32.png',
-                                                'e22a6f96a8dc618ae1dd61b484daa726b29e4a8c0.png', // Corrected typos if any, relying on previously seen list
-                                                'e4afb2e3debc88092492cdc71cceccbf.png',
-                                                'e8acb0e432e8b6a22a218b7be9f6491b.png',
-                                                'e9b120bb935cfe5732ffd3740d251d69.png'
-                                            ].map((img) => (
-                                                <button
-                                                    key={img}
-                                                    type="button"
-                                                    onClick={() => {
-                                                        const path = `/images/${img}`;
-                                                        setFormData({ ...formData, photoUrl: path });
-                                                        setProfile((prev: any) => ({ ...prev, photoUrl: path }));
-                                                        setSelectedFile(null);
-                                                    }}
-                                                    className={`relative flex-shrink-0 w-16 h-16 md:w-20 md:h-20 rounded-full border-2 overflow-hidden transition-all snap-start ${formData.photoUrl === `/images/${img}` ? 'border-primary shadow-[0_0_15px_#ff007f] scale-105' : 'border-white/10 hover:border-primary/50 hover:scale-105'}`}
-                                                >
-                                                    <img src={`/images/${img}`} alt="Gallery" className="w-full h-full object-cover" />
-                                                    {formData.photoUrl === `/images/${img}` && (
-                                                        <div className="absolute inset-0 bg-primary/30 flex items-center justify-center">
-                                                            <span className="material-symbols-outlined text-white font-bold text-lg">check</span>
-                                                        </div>
-                                                    )}
-                                                </button>
-                                            ))}
-                                        </div>
-                                    </div>
+
 
                                     <div>
                                         <label className="flex items-center gap-2 text-white/40 text-[9px] md:text-[10px] font-black uppercase tracking-[0.2em] mb-2 md:mb-3 ml-2">
