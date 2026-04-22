@@ -1,0 +1,39 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Function to check if the user is the Super Admin
+    function isAdmin() {
+      return request.auth != null && request.auth.token.email == 'navilatayeba09@gmail.com';
+    }
+
+    // ==========================================
+    // 1. RULES FOR USERS COLLECTION (Members)
+    // ==========================================
+    match /users/{userId} {
+      // Anyone can read the users list (needed to display the Members page)
+      allow read: if true;
+      
+      // A user can update their own profile, OR the Admin can do anything (Create/Update/Delete)
+      allow write: if isAdmin() || request.auth.uid == userId;
+    }
+
+    // ==========================================
+    // 2. RULES FOR APPLICATIONS COLLECTION (Recruits)
+    // ==========================================
+    match /applications/{appId} {
+      // Anyone can submit a recruitment form
+      allow create: if true;
+      
+      // Only the Admin can read, approve, or delete these applications
+      allow read, update, delete: if isAdmin();
+    }
+    
+    // ==========================================
+    // 3. SECURE EVERYTHING ELSE
+    // ==========================================
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
