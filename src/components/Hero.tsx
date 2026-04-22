@@ -74,7 +74,7 @@ export default function Hero() {
                     <span className="text-5xl sm:text-7xl md:text-9xl font-display font-black leading-none tracking-tight animated-text-gradient uppercase drop-shadow-[0_0_30px_rgba(255,0,127,0.3)]">
                         PINKY
                     </span>
-                    <span className="text-5xl sm:text-7xl md:text-9xl font-display font-black leading-none tracking-tight text-primary uppercase drop-shadow-[0_0_30px_rgba(255,0,127,0.3)]" style={{ animationDelay: '0.2s' }}>
+                    <span className="text-5xl sm:text-7xl md:text-9xl font-display font-black leading-none tracking-tight animated-text-gradient uppercase drop-shadow-[0_0_30px_rgba(255,0,127,0.3)]" style={{ animationDelay: '0.2s' }}>
                         PIXELS
                     </span>
                 </h1>
