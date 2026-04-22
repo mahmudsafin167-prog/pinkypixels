@@ -173,8 +173,8 @@ export default function AuthPage() {
                                     type="text"
                                     value={name}
                                     onChange={(e) => setName(e.target.value)}
-                                    className="w-full bg-black/40 border border-white/10 rounded-2xl p-4 text-white focus:border-primary/60 focus:outline-none focus:ring-1 focus:ring-primary/20 transition-all font-medium"
-                                    placeholder="e.g. Pix Izumi"
+                                    className="w-full bg-black/40 border border-white/10 rounded-2xl p-4 text-white focus:border-primary/60 focus:outline-none focus:ring-1 focus:ring-primary/20 transition-all font-medium placeholder:text-white/20"
+                                    placeholder="Enter your game name"
                                     required
                                 />
                             </div>
@@ -184,8 +184,8 @@ export default function AuthPage() {
                                     type="text"
                                     value={uid}
                                     onChange={(e) => setUid(e.target.value)}
-                                    className="w-full bg-black/40 border border-white/10 rounded-2xl p-4 text-white focus:border-primary/60 focus:outline-none focus:ring-1 focus:ring-primary/20 transition-all font-mono"
-                                    placeholder="e.g. 3055641363"
+                                    className="w-full bg-black/40 border border-white/10 rounded-2xl p-4 text-white focus:border-primary/60 focus:outline-none focus:ring-1 focus:ring-primary/20 transition-all font-mono placeholder:text-white/20"
+                                    placeholder="Enter your Free Fire ID"
                                     required
                                 />
                             </div>
@@ -198,8 +198,8 @@ export default function AuthPage() {
                             type="text"
                             value={username}
                             onChange={(e) => setUsername(e.target.value)}
-                            className="w-full bg-black/40 border border-white/10 rounded-2xl p-4 text-white focus:border-primary/60 focus:outline-none focus:ring-1 focus:ring-primary/20 transition-all font-medium"
-                            placeholder="e.g. priya123"
+                            className="w-full bg-black/40 border border-white/10 rounded-2xl p-4 text-white focus:border-primary/60 focus:outline-none focus:ring-1 focus:ring-primary/20 transition-all font-medium placeholder:text-white/20"
+                            placeholder="Enter a username"
                             required
                         />
                     </div>
@@ -209,7 +209,7 @@ export default function AuthPage() {
                             type="password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
-                            className="w-full bg-black/40 border border-white/10 rounded-2xl p-4 text-white focus:border-primary/60 focus:outline-none focus:ring-1 focus:ring-primary/20 transition-all font-medium"
+                            className="w-full bg-black/40 border border-white/10 rounded-2xl p-4 text-white focus:border-primary/60 focus:outline-none focus:ring-1 focus:ring-primary/20 transition-all font-medium placeholder:text-white/20"
                             placeholder="••••••••"
                             required
                         />
